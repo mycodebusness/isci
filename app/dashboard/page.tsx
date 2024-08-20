@@ -66,24 +66,49 @@
 // }
 
 // export default Page;
-import React from "react";
-function Page() {
-  const newClient = {
-    nom: "Ilunga",
-    prenom: "Isaac",
-    adresse: "123 Avenue KAPATA, Likasi",
-    telephone: "+243970000000",
-  };
+// import React from "react";
+// function Page() {
+//   const newClient = {
+//     nom: "Ilunga",
+//     prenom: "Isaac",
+//     adresse: "123 Avenue KAPATA, Likasi",
+//     telephone: "+243970000000",
+//   };
 
-  fetch("/api/clients", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newClient),
-  });
+//   fetch("/api/clients", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(newClient),
+//   });
 
-  return <div>Page</div>;
+//   return <div>Page</div>;
+// }
+
+// export default Page;
+
+export default function Dashboard() {
+  return (
+    <div className="flex flex-1">
+      <div className="p-2 md:p-10 rounded-tl-2xl border border-border flex flex-col gap-2 flex-1 w-full h-full">
+        <div className="flex gap-2">
+          {[...new Array(4)].map((i) => (
+            <div
+              key={"first-array" + i}
+              className="h-20 w-full rounded-lg  animate-pulse"
+            ></div>
+          ))}
+        </div>
+        <div className="flex gap-2 flex-1">
+          {[...new Array(2)].map((i) => (
+            <div
+              key={"second-array" + i}
+              className="h-full w-full rounded-lg   animate-pulse"
+            ></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }
-
-export default Page;
