@@ -39,10 +39,12 @@ export type Recu = {
 };
 
 export type Inscription = {
-  matricule: string;
-  codedepartement: string;
+  matricule: string; // etudiant
+  noms?: string; // etudiant
+  codedepartement: string; //departement
+  nom?: string; // departement
   dateinscription: string;
-  promotion: "BAC1" | "BAC2" | "BAC3" | "L1" | "L2" | "G1" | "G2" | "G3";
+  promotion: string;
 };
 
 export type Departement = {
