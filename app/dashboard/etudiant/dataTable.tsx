@@ -154,23 +154,6 @@ export const columns: ColumnDef<Payment>[] = [
             </Tooltip>
           </TooltipProvider>
 
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Link
-                  className="flex gap-3"
-                  href={`/dashboard/etudiant/${row.original.matricule}`}
-                >
-                  <Pen className="h-7 w-7 rounded-full text-white bg-blue-800 hover:bg-blue-600  p-2" />
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent className="flex gap-2 justify-center items-center">
-                <Pen className="h-6 w-6 rounded-full" />
-                <p>modifier l&apos;étudiant {row.original.noms}</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-
           <Dialog>
             <TooltipProvider>
               <Tooltip>
