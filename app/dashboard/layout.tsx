@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/sidebar";
 import {
   IconArrowLeft,
-  IconBrandTabler,
-  IconSettings,
-  IconUserBolt,
+  IconHome,
+  IconCashRegister,
+  IconReceipt2,
+  IconSchool,
+  IconAdjustments,
 } from "@tabler/icons-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -21,22 +23,27 @@ export default function RootLayout({
     {
       label: "Dashboard",
       href: "#",
-      icon: <IconBrandTabler className=" h-5 w-5 flex-shrink-0" />,
+      icon: <IconHome className=" h-5 w-5 flex-shrink-0" />,
     },
     {
       label: "Etudiant",
-      href: "#",
-      icon: <IconUserBolt className=" h-5 w-5 flex-shrink-0" />,
+      href: "/dashboard/etudiant",
+      icon: <IconSchool className=" h-5 w-5 flex-shrink-0" />,
     },
     {
       label: "Recu",
       href: "#",
-      icon: <IconUserBolt className=" h-5 w-5 flex-shrink-0" />,
+      icon: <IconReceipt2 className=" h-5 w-5 flex-shrink-0" />,
     },
     {
       label: "Inscription",
-      href: "#",
-      icon: <IconSettings className="h-5 w-5 flex-shrink-0" />,
+      href: "/dashboard/inscription",
+      icon: <IconCashRegister className="h-5 w-5 flex-shrink-0" />,
+    },
+    {
+      label: "Département",
+      href: "/dashboard/departement",
+      icon: <IconAdjustments className="h-5 w-5 flex-shrink-0" />,
     },
     {
       label: "Logout",

@@ -21,59 +21,111 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { addEtudiant } from "@/lib/actions";
+import { addEtudiant, upDateEtudiant } from "@/lib/actions";
 
-export default function LoginForm() {
-  const [matricule, setMatricule] = useState("");
-  const [noms, setNoms] = useState("");
-  const [sexe, setSexe] = useState("Homme");
-  const [lieunaiss, setLieunaiss] = useState("");
-  const [datenaiss, setDatenaiss] = useState("");
-  const [nationalite, setNationalite] = useState("");
-  const [etatcivil, setEtatCivil] = useState("");
-  const [provinceorigine, setProvince] = useState("");
-  const [district, setDistrict] = useState("");
-  const [territoire, setTerritoire] = useState("");
-  const [adressetudiant, setAdresse] = useState("");
-  const [telresponsable, setTelrespo] = useState("");
-  const [email, setEmail] = useState("");
+export default function Formulaire({
+  matriculeD = "",
+  nomsD = "",
+  sexeD = "Homme",
+  lieunaissD = "",
+  datenaissD = "",
+  nationaliteD = "",
+  etatcivilD = "",
+  provinceorigineD = "",
+  districtD = "",
+  territoireD = "",
+  adressetudiantD = "",
+  telresponsableD = "",
+  emailD = "",
+  passwordD = "",
+  nomsrespoD = "",
+  professionD = "",
+}) {
+  const [matricule, setMatricule] = useState(matriculeD);
+  const [noms, setNoms] = useState(nomsD);
+  const [sexe, setSexe] = useState(sexeD);
+  const [lieunaiss, setLieunaiss] = useState(lieunaissD);
+  const [datenaiss, setDatenaiss] = useState(datenaissD);
+  const [nationalite, setNationalite] = useState(nationaliteD);
+  const [etatcivil, setEtatCivil] = useState(etatcivilD);
+  const [provinceorigine, setProvince] = useState(provinceorigineD);
+  const [district, setDistrict] = useState(districtD);
+  const [territoire, setTerritoire] = useState(territoireD);
+  const [adressetudiant, setAdresse] = useState(adressetudiantD);
+  const [telresponsable, setTelrespo] = useState(telresponsableD);
+  const [email, setEmail] = useState(emailD);
   const [error, setError] = useState<string | null>(null);
-  const [password, setPassword] = useState("");
-  const [nomsrespo, setNomsRespo] = useState<string>("");
-  const [profession, setProfession] = useState("");
+  const [password, setPassword] = useState(passwordD);
+  const [nomsrespo, setNomsRespo] = useState<string>(nomsrespoD);
+  const [profession, setProfession] = useState(professionD);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      await addEtudiant(
-        matricule,
-        noms,
-        sexe,
-        lieunaiss,
-        datenaiss,
-        nationalite,
-        etatcivil,
-        provinceorigine,
-        district,
-        territoire,
-        adressetudiant,
-        telresponsable,
-        email,
-        password,
-        nomsrespo,
-        profession
-      );
-      toast({
-        title: "inscription",
-        description: `Vous êtes inscrit avec succès`,
-        className: "bg-blue-700 text-white",
-      });
-      window.location.href = `/etudiant`;
-    } catch (error) {
-      toast({
-        title: "Erreur de création",
-        description: `veuillez réesseyez plus tard`,
-        className: "bg-red-700 text-white",
-      });
+    if (matriculeD == "") {
+      try {
+        await addEtudiant(
+          matricule,
+          noms,
+          sexe,
+          lieunaiss,
+          datenaiss,
+          nationalite,
+          etatcivil,
+          provinceorigine,
+          district,
+          territoire,
+          adressetudiant,
+          telresponsable,
+          email,
+          password,
+          nomsrespo,
+          profession
+        );
+        toast({
+          title: "Ajout étudiant",
+          description: `Etudiant ajouté  avec succès`,
+          className: "bg-blue-700 text-white",
+        });
+        window.location.href = `/dashboard/etudiant`;
+      } catch (error) {
+        toast({
+          title: "Erreur de l'ajout",
+          description: `veuillez réessayez plus tard`,
+          className: "bg-red-700 text-white",
+        });
+      }
+    } else {
+      try {
+        await upDateEtudiant(
+          matricule,
+          noms,
+          sexe,
+          lieunaiss,
+          datenaiss,
+          nationalite,
+          etatcivil,
+          provinceorigine,
+          district,
+          territoire,
+          adressetudiant,
+          telresponsable,
+          email,
+          password,
+          nomsrespo,
+          profession
+        );
+        toast({
+          title: "Modification",
+          description: `Coordonnées étudiant modifiées avec succès`,
+          className: "bg-blue-700 text-white",
+        });
+        window.location.href = `/dashboard/etudiant`;
+      } catch (error) {
+        toast({
+          title: "Erreur de modification",
+          description: `veuillez réessayez plus tard`,
+          className: "bg-red-700 text-white",
+        });
+      }
     }
   };
 
@@ -99,7 +151,7 @@ export default function LoginForm() {
     setMatricule(mat);
   }, []);
   return (
-    <Card className="mx-auto max-w-sm">
+    <Card className="mx-auto w-[92vw] overflow-auto">
       <CardHeader>
         <CardTitle className="text-xl">S&apos;inscrire</CardTitle>
         <CardDescription>
@@ -171,7 +223,7 @@ export default function LoginForm() {
             <Label htmlFor="noms">Nom complet</Label>
             <Input
               id="noms"
-              placeholder="ex : KABANGU MULOTA Patrick"
+              placeholder="exemple : KABANGU MULOTA Patrick"
               value={noms}
               onChange={(e) => setNoms(e.target.value)}
               required
@@ -633,15 +685,9 @@ export default function LoginForm() {
             />
           </div>
           <Button type="submit" className="w-full">
-            S&apos;inscrire
+            Soumettre
           </Button>
         </form>
-        <div className="mt-4 text-center text-sm">
-          Etes-vous déjà inscrit?{" "}
-          <Link href="/login" className="underline">
-            Se connecter
-          </Link>
-        </div>
       </CardContent>
     </Card>
   );

@@ -26,7 +26,7 @@ export default function Login() {
         description: `connexion avec succès`,
         className: "bg-blue-700 text-white",
       });
-      window.location.href = "/etudiant/1";
+      window.location.href = `/etudiant`;
     } else {
       const data = await response.json();
       setError(data.error);
